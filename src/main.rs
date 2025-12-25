@@ -73,8 +73,11 @@ fn main() {
 
     // RESULT è SAEMPRE UN ENUM CON 2 VALORI --> Ok --> Err
     // operazioni che possono anche non andare a buon fine tipo apertura di un file
-    
+
     let result_apriporta = apri_porta("comune");
+
+    println!("result: {:?}", result_apriporta);
+    
     match result_apriporta {
         Ok(value) => println!("{}", value),
         Err(value)=> println!("{}", value),
@@ -105,7 +108,8 @@ fn cerca_frutto(nome: &str, lista : &[&str]) -> Option<String> {
     None
 }
 
-//  chiede il life time concetto da approfondire 
+//  Rust chiede garanzie sul life time del dato concetto da approfondire 
+// 'a risultato valido fin che è valida la lista in cui l ho preso
 fn cerca_frutto_str<'a>(nome: &str, lista : &'a [&'a str]) -> Option<&'a str> {
     for &element in lista {
         if element == nome {
