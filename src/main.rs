@@ -14,6 +14,18 @@ impl Person {
 
 fn main() {
 
+    // crea persona diretamente, cambia nome con funzione implementata in struttura
+    let mut persona_due = Person {
+        nome : String::from("Mark"), 
+        cognome : String::from("Hall"), 
+        eta: 68,
+    };
+
+    persona_due.nome = String::from("Ercole");
+
+    println!("persona: {persona_due :?}");
+
+    // crea persona con crea persona, cambia nome con funzione implementata in struttura
     let mut persona_uno = crea_persona(String::from("Fabio"), String::from("Bistolfi"), 64);
 
     println!("persona: {persona_uno :?}");
@@ -22,19 +34,8 @@ fn main() {
 
     println!("nome: {}, cognome: {}, eta {}.", persona_uno.nome, persona_uno.cognome, persona_uno.eta);
 
-    let mut persona_due = Person {
-        nome : String::from("Mark"), 
-        cognome : String::from("Hall"),
-        eta: 68,
-    };
-
-    persona_due.nome = String::from("Ercole");
-
-    println!("persona: {persona_due :?}");
 
 
-
-    // println!("persona: { :?}", persona_due);
 }
 
 fn crea_persona(_nome : String ,_cognome : String, _eta: u8) -> Person {
