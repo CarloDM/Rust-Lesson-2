@@ -50,9 +50,69 @@ fn main() {
     }
 
     let num_di_vettore = mio_vettore[1];
-    println!("secondo numero del vettore {}", num_di_vettore)
+    println!("secondo numero del vettore {}", num_di_vettore);
 
+    // OPTION è un enum fatto di -- > Some() e di --> None
+    // ottimo quando dobbiamo cercare qualcosa che puo esserci oppure no
 
+    let frutta = ["mela", "pera", "cocco", "ananas"];
+
+    let risultato_ricerca_frutta = cerca_frutto("ananas", &frutta);
+    
+    match risultato_ricerca_frutta {
+        Some(value) => println!("trovato il frutto: {}", value),
+        None => println!("nessun frutto trovato"),
+    }
+
+    let risultato_ricerca_frutta_str = cerca_frutto_str("cocco", &frutta);
+
+    match risultato_ricerca_frutta_str {
+        Some(value) => println!("trovato str frutto: {}", value),
+        None => println!("nessun frutto str trovato"),
+    };
+
+    // RESULT è SAEMPRE UN ENUM CON 2 VALORI --> Ok --> Err
+    // operazioni che possono anche non andare a buon fine tipo apertura di un file
+    
+    let result_apriporta = apri_porta("comune");
+    match result_apriporta {
+        Ok(value) => println!("{}", value),
+        Err(value)=> println!("{}", value),
+    }
+
+    let result_apriporta = apri_porta("blindata");
+    match result_apriporta {
+        Ok(value) => println!("{}", value),
+        Err(value)=> println!("{}", value),
+    }
+
+}
+
+fn apri_porta(tipo: &str) -> Result<&str, &str> {
+    if tipo == "comune" {
+        return Ok("porta comune aperta!");
+    } else {
+        return Err("porta chiusa!")
+    }
+}
+
+fn cerca_frutto(nome: &str, lista : &[&str]) -> Option<String> {
+    for &element in lista {
+        if element == nome {
+            return Some(format!("{}", element));
+        }
+    }
+    None
+}
+
+//  chiede il life time concetto da approfondire 
+fn cerca_frutto_str<'a>(nome: &str, lista : &'a [&'a str]) -> Option<&'a str> {
+    for &element in lista {
+        if element == nome {
+            return Some(element);
+        }
+    }
+    None
 }
 
 fn crea_persona(_nome : String ,_cognome : String, _eta: u8) -> Person {
